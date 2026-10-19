@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yayın Dünyasının En Tatlı Çiftçisi - Canım Ablama Özel 🌾✨</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display, Fredoka & Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farm-green': '#82c43c',
+                        'farm-dark-green': '#3a691e',
+                        'farm-yellow': '#fbd14b',
+                        'farm-wood': '#8d5b4c',
+                        'farm-dark-wood': '#4a2c20',
+                        'farm-paper': '#fefae0',
+                        'farm-gold': '#d4af37'
+                    },
+                    fontFamily: {
+                        'fredoka': ['Fredoka', 'sans-serif'],
+                        'nunito': ['Nunito', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #7eb530 0%, #44771e 50%, #2a4e11 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: justify-between;
+        }
+
+        h1, h2, h3, .farm-font {
+            font-family: 'Fredoka', cursive;
+        }
+
+        .quote-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Güneş Işığı ve Pastel Arka Plan Efekti */
+        .sun-rays {
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140vw;
+            height: 140vw;
+            background: radial-gradient(circle, rgba(255,243,176,0.25) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse-sun 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-sun {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+            100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+        }
+
+        /* Ahşap Kitap Kapak & Sayfa Yapısı */
+        .book-container {
+            perspective: 1500px;
+        }
+
+        .book-cover {
+            background: #6a3e2e;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 4px),
+                              radial-gradient(circle at center, #8d5b4c 0%, #4a2c20 100%);
+            border: 8px solid #331d14;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.15);
+            border-radius: 28px;
+            position: relative;
+        }
+
+        .book-page {
+            background-color: #fefae0;
+            background-image: radial-gradient(#e6ccb2 0.75px, transparent 0.75px);
+            background-size: 16px 16px;
+            border: 3px dashed #d4a373;
+            border-radius: 20px;
+            box-shadow: inset 0 0 30px rgba(141, 91, 76, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Sayfa Geçiş Efektleri */
+        .page-node {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px) scale(0.98);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .page-node.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Tatlı Butonlar */
+        .btn-hayday {
+            background: linear-gradient(180deg, #fbd14b 0%, #ff9f43 100%);
+            border: 3px solid #b85e00;
+            box-shadow: 0 5px 0 #8c4400, 0 8px 15px rgba(0,0,0,0.25);
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+            transition: all 0.2s ease;
+        }
+
+        .btn-hayday:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #8c4400, 0 10px 20px rgba(0,0,0,0.3);
+            filter: brightness(1.05);
+        }
+
+        .btn-hayday:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #8c4400, 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn-green {
+            background: linear-gradient(180deg, #9ae65c 0%, #5ba829 100%);
+            border: 3px solid #2d5e12;
+            box-shadow: 0 5px 0 #1b3d0a, 0 8px 15px rgba(0,0,0,0.25);
+        }
+
+        .btn-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #1b3d0a;
+        }
+
+        .btn-green:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #1b3d0a;
+        }
+
+        /* Particles Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Süslü Tırnak İşareti */
+        .quote-icon {
+            color: #e6ccb2;
+            font-size: 3.5rem;
+            line-height: 1;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #4a2c20;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fbd14b;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative text-gray-800 py-6 px-4 flex flex-col justify-between items-center min-h-screen">
+
+    <!-- Güneş Işıkları ve Uçuşan Parçacıklar -->
+    <div class="sun-rays"></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- SAĞ ÜST KONTROL BAR (Fon Müzik & Kalp Yağmuru) -->
+    <header class="w-full max-w-4xl mx-auto flex justify-between items-center mb-4 z-20">
+        <!-- Sol Üst Rozet -->
+        <div class="flex items-center gap-2 bg-farm-dark-wood/80 text-amber-200 px-4 py-2 rounded-full border-2 border-farm-yellow/50 backdrop-blur-md shadow-lg text-xs sm:text-sm font-bold">
+            <i class="fas fa-broadcast-tower text-red-400 animate-pulse"></i>
+            <span>Abla Canlı Yayın Kitaplığı ✨</span>
+        </div>
+
+        <!-- Sağ Üst Butonlar -->
+        <div class="flex items-center gap-2">
+            <button onclick="triggerLoveRain()" class="bg-pink-500 hover:bg-pink-600 text-white p-2.5 sm:px-4 sm:py-2 rounded-full border-2 border-pink-200 shadow-lg text-xs font-bold transition flex items-center gap-2">
+                <i class="fas fa-heart text-white animate-bounce"></i>
+                <span class="hidden sm:inline">Sevgi Yağmuru</span>
+            </button>
+            <button id="soundToggle" onclick="toggleAudio()" class="bg-farm-yellow text-farm-dark-wood p-2.5 sm:px-4 sm:py-2 rounded-full border-2 border-amber-600 shadow-lg text-xs font-bold transition flex items-center gap-2">
+                <i id="soundIcon" class="fas fa-music"></i>
+                <span class="hidden sm:inline" id="soundText">Fon Müzik</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ANA KİTAP / SUNUM ALANI -->
+    <main class="w-full max-w-3xl my-auto z-10 book-container">
+        <div class="book-cover p-3 sm:p-6 shadow-2xl">
+            <div class="book-page p-6 sm:p-10 min-h-[480px] sm:min-h-[520px] flex flex-col justify-between relative overflow-hidden">
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- KAPAK SAYFASI (INDEX 0) -->
+                <!-- ------------------------------------------------------------- -->
+                <div id="page-0" class="page-node active text-center flex flex-col justify-between h-full my-auto">
+                    <div class="py-4">
+                        <div class="inline-block bg-amber-200/80 text-amber-900 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border border-amber-400 mb-4">
+                            👑 Hay Day Yayınlarının Kraliçesi
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl font-black text-farm-dark-wood leading-tight mb-3">
+                            Canım Ablam İçin <br> 🌾
+                        </h1>
+                        <p class="text-amber-800 text-sm sm:text-base font-semibold max-w-md mx-auto italic">
+                            Canlı yayınlarında dağıttığın neşeye sıcak sohbetine ve Hay Day çiftliğinin eşsiz huzuruna adanmış özel sayfalar...
+                        </p>
+                    </div>
+
+                    <!-- Kapak Süsü -->
+                    <div class="my-6 flex justify-center items-center gap-4">
+                        <span class="text-4xl animate-bounce">🚜</span>
+                        <div class="w-16 h-1 bg-amber-400/60 rounded-full"></div>
+                        <span class="text-4xl animate-bounce" style="animation-delay: 0.2s">🌾</span>
+                        <div class="w-16 h-1 bg-amber-400/60 rounded-full"></div>
+                        <span class="text-4xl animate-bounce" style="animation-delay: 0.4s">🌟</span>
+                    </div>
+
+                    <div>
+                        <button onclick="goToPage(1)" class="btn-hayday py-3.5 px-8 rounded-2xl text-white font-black text-lg tracking-wider uppercase inline-flex items-center gap-3">
+                            Sayfaları Oku <i class="fas fa-book-open"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- SAYFA 1: Güzel Yayının ve Tatlı Sohbetin -->
+                <!-- ------------------------------------------------------------- -->
+                <div id="page-1" class="page-node">
+                    <div class="border-b-2 border-amber-200 pb-3 mb-6 flex justify-between items-center">
+                        <span class="text-xs font-black text-amber-700 uppercase tracking-wider farm-font">I. Bölüm</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-farm-dark-wood">Yayındaki Işığın ve Tatlı Sohbetin ✨</h2>
+                    </div>
+
+                    <div class="space-y-6 text-amber-950">
+                        <div class="relative pl-6">
+                            <span class="quote-icon absolute -left-2 -top-3">“</span>
+                            <p class="quote-font text-lg sm:text-xl italic font-semibold leading-relaxed relative z-10 text-amber-900">
+                                Sen yayın tuşuna bastığında sadece bir oyun açılmıyor ablam yorucu bir günün ardından sığınılacak en sıcak en huzurlu liman açılıyor.
+                            </p>
+                        </div>
+
+                        <div class="bg-amber-100/70 p-4 sm:p-5 rounded-2xl border border-amber-300/80 space-y-3">
+                            <p class="text-sm sm:text-base leading-relaxed">
+                                <i class="fas fa-star text-amber-500 mr-2"></i>
+                                Sesindeki o samimiyet yayını izlerken içimi ısıtmaya yetiyor Bir yandan çiftliği yorumlarken bir yandan sohbeti hiç eksik etmemen insanı nasıl mutlu ediyor bilemezsin ablam
+                            <p class="text-sm sm:text-base leading-relaxed">
+                                <i class="fas fa-star text-amber-500 mr-2"></i>
+                                Sen yayın açtığında senin o güzel yayını izlemek beni ne kadar mutlu ediyor anlatamam ablam
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- SAYFA 2: Çiftliğin En Güzel Lideri -->
+                <!-- ------------------------------------------------------------- -->
+                <div id="page-2" class="page-node">
+                    <div class="border-b-2 border-amber-200 pb-3 mb-6 flex justify-between items-center">
+                        <span class="text-xs font-black text-amber-700 uppercase tracking-wider farm-font">II. Bölüm</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-farm-dark-wood">Çiftliğin En Tatlı Muhtarı 🌾</h2>
+                    </div>
+
+                    <div class="space-y-5 text-amber-950">
+                        <div class="relative pl-6">
+                            <span class="quote-icon absolute -left-2 -top-3">“</span>
+                            <p class="quote-font text-lg sm:text-xl italic font-semibold leading-relaxed relative z-10 text-amber-900">
+                                Hay Day tarlalarında ektiğin her buğday neşe biçtiğin her ürün izleyicilerine dağıttığın bir tebessüm gibi.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-semibold">
+                            <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200 flex items-start gap-3">
+                                <span class="text-2xl">🍰</span>
+                                <div>
+                                    <h4 class="font-bold text-amber-900">En Tatlı İkramlar</h4>
+                                    <p class="text-amber-800 font-normal">Yayındaki güzel enerjin çiftlikteki pastalardan çok daha tatlı!</p>
+                                </div>
+                            </div>
+                            <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200 flex items-start gap-3">
+                                <span class="text-2xl">🚢</span>
+                                <div>
+                                    <h4 class="font-bold text-amber-900">Gönül Gemileri</h4>
+                                    <p class="text-amber-800 font-normal">Gemileri zamanında doldururken izleyenlerin gönlünü de neşeyle dolduruyorsun❤️</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-sm sm:text-base italic text-center font-bold text-amber-900 pt-2">
+                            "Bir çiftlik ancak bu kadar sevgiyle yönetilebilir ve bir yayın ancak bu kadar içten yapılabilir❤️"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- SAYFA 3: Yayınındaki Huzur ve İlham -->
+                <!-- ------------------------------------------------------------- -->
+                <div id="page-3" class="page-node">
+                    <div class="border-b-2 border-amber-200 pb-3 mb-6 flex justify-between items-center">
+                        <span class="text-xs font-black text-amber-700 uppercase tracking-wider farm-font">III. Bölüm</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-farm-dark-wood">Yayın Odasındaki Huzur 💌</h2>
+                    </div>
+
+                    <div class="space-y-6 text-amber-950">
+                        <div class="relative pl-6">
+                            <span class="quote-icon absolute -left-2 -top-3">“</span>
+                            <p class="quote-font text-lg sm:text-xl italic font-semibold leading-relaxed relative z-10 text-amber-900">
+                                İnsanların günün yorgunluğunu unutmak için senin yayınını seçmesi bir tesadüf değil abla bu senin iyi kalbinin ve emeğinin bir karşılığı
+                            </p>
+                        </div>
+
+                        <div class="bg-white/80 p-5 rounded-2xl border-2 border-amber-300 shadow-inner">
+                            <p class="text-sm sm:text-base leading-relaxed text-amber-900 font-medium">
+                                Sabrınla kimseyi kırmayan nazik dilinle ve her yayına kattığın o neşeyle sadece harika bir yayıncı değil bana günün tüm yorgunluğunu unutturan harika bir yayıncısın 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- SAYFA 4: Ablama Dilekler ve Başarılar ❤️-->
+                <!-- ------------------------------------------------------------- -->
+                <div id="page-4" class="page-node">
+                    <div class="border-b-2 border-amber-200 pb-3 mb-6 flex justify-between items-center">
+                        <span class="text-xs font-black text-amber-700 uppercase tracking-wider farm-font">IV. Bölüm</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-farm-dark-wood">Sonsuz Başarı ve Sevgiyle 🌟</h2>
+                    </div>
+
+                    <div class="space-y-5 text-amber-950 text-center">
+                        <div class="inline-block bg-yellow-200 text-yellow-900 p-3 rounded-full text-3xl mb-1">
+                            🏆
+                        </div>
+
+                        <h3 class="text-lg sm:text-xl font-bold text-farm-dark-wood">
+                            Yayınların Hep Rekorlar Kırsın!
+                        </h3>
+
+                        <p class="text-sm sm:text-base leading-relaxed text-amber-900 font-medium max-w-lg mx-auto">
+                            İzleyicilerin beğeni sayıların ve takipçilerin katlanarak artsın ama o güzel gülüşün ve  neşen yayınlarından hiç eksik olmasın.
+                        </p>
+
+                        <div class="p-4 bg-amber-100/90 rounded-2xl border-2 border-amber-400">
+                            <p class="quote-font text-base sm:text-lg italic font-bold text-amber-950">
+                                "İyi ki varsın iyi ki benim ablamsın Canlı yayınlarında ve hayatında her şey gönlünce olsun" ❤️
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- BOTTOM NAVIGATION CONTROLS (SAYFA DEĞİŞTİRME) -->
+                <!-- ------------------------------------------------------------- -->
+                <div id="navControls" class="hidden mt-6 pt-4 border-t-2 border-amber-200/80 flex justify-between items-center">
+                    <button id="prevBtn" onclick="changePage(-1)" class="btn-hayday py-2 px-4 rounded-xl text-white font-extrabold text-sm flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> Önceki
+                    </button>
+
+                    <span id="pageIndicator" class="font-extrabold text-xs sm:text-sm text-amber-900 bg-amber-200/80 px-3 py-1 rounded-full border border-amber-400 farm-font">
+                        Sayfa 1 / 4
+                    </span>
+
+                    <button id="nextBtn" onclick="changePage(1)" class="btn-green py-2 px-4 rounded-xl text-white font-extrabold text-sm flex items-center gap-2">
+                        Sonraki <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-xl mx-auto text-center mt-4 z-10">
+        <p class="text-xs text-white/90 font-bold bg-farm-dark-wood/60 py-1.5 px-4 rounded-full inline-block backdrop-blur-sm border border-amber-200/20">
+            Kardeşinden Sevgiyle Hazırlandı 💕 • Hay Day Yayın Özel
+        </p>
+    </footer>
+
+    <!-- JAVASCRIPT KODLARI -->
+    <script>
+        /* ==========================================
+           1. SAYFA YÖNETİMİ VE GEÇİŞ LOGİC
+        ========================================== */
+        let currentPage = 0;
+        const totalPages = 4; // 0 Kapak, 1-4 İçi
+
+        function updatePageDisplay() {
+            // Tüm sayfaları gizle
+            for (let i = 0; i <= totalPages; i++) {
+                const pageEl = document.getElementById(`page-${i}`);
+                if (pageEl) {
+                    pageEl.classList.remove('active');
+                }
+            }
+
+            // Aktif sayfayı göster
+            const activePageEl = document.getElementById(`page-${currentPage}`);
+            if (activePageEl) {
+                activePageEl.classList.add('active');
+            }
+
+            // Navigasyon barı görünürlüğü
+            const navControls = document.getElementById('navControls');
+            if (currentPage === 0) {
+                navControls.classList.add('hidden');
+            } else {
+                navControls.classList.remove('hidden');
+                
+                // Sayfa göstergesi güncelle
+                document.getElementById('pageIndicator').innerText = `Sayfa ${currentPage} / ${totalPages}`;
+
+                // Önceki / Sonraki buton durumları
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                prevBtn.style.opacity = (currentPage === 1) ? '0.5' : '1';
+                prevBtn.style.pointerEvents = (currentPage === 1) ? 'none' : 'auto';
+
+                if (currentPage === totalPages) {
+                    nextBtn.innerHTML = 'Kapağa Dön <i class="fas fa-redo"></i>';
+                } else {
+                    nextBtn.innerHTML = 'Sonraki <i class="fas fa-arrow-right"></i>';
+                }
+            }
+
+            // Sayfa geçiş ses efekti
+            if (currentPage > 0) {
+                playTone(400 + currentPage * 50, 'sine', 0.1);
+            }
+        }
+
+        function goToPage(pageNumber) {
+            currentPage = pageNumber;
+            updatePageDisplay();
+        }
+
+        function changePage(delta) {
+            if (currentPage === totalPages && delta === 1) {
+                currentPage = 0; // Kapağa dön
+            } else {
+                currentPage = Math.max(1, Math.min(totalPages, currentPage + delta));
+            }
+            updatePageDisplay();
+        }
+
+        /* ==========================================
+           2. UÇUŞAN YAPRAK VE IŞILTILAR (CANVAS)
+        ========================================== */
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const colors = ['#fbd14b', '#ffffff', '#e0f7fa', '#ffbe76', '#c7ecee'];
+
+        class Sparkle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 4 + 1;
+                this.speedY = - (Math.random() * 0.8 + 0.2);
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random();
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.opacity += (Math.random() - 0.5) * 0.02;
+
+                if (this.y < -10 || this.opacity <= 0) {
+                    this.reset();
+                    this.y = height + 10;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, Math.min(1, this.opacity));
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Sparkle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        /* ==========================================
+           3. SEVGİ YAĞMURU (KONFETİ & KALP)
+        ========================================== */
+        function triggerLoveRain() {
+            if (typeof confetti === 'function') {
+                // Sol ve sağ taraftan kalp/konfeti patlaması
+                confetti({
+                    particleCount: 50,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff6b6b', '#fbd14b', '#ffffff']
+                });
+                confetti({
+                    particleCount: 50,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff6b6b', '#fbd14b', '#ffffff']
+                });
+            }
+            playTone(523.25, 'triangle', 0.2);
+            setTimeout(() => playTone(659.25, 'triangle', 0.3), 150);
+        }
+
+        /* ==========================================
+           4. FON MÜZİK SENTEZLEYİCİSİ (WEB AUDIO API)
+        ========================================== */
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let audioTimer = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playTone(freq, type = 'sine', duration = 0.2, volume = 0.1) {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(volume, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Audio izni verilmemişse yut
+            }
+        }
+
+        // Rahatlatıcı, tatlı arpej melodisi (Lofi/Farm stili)
+        const melody = [
+            261.63, 329.63, 392.00, 523.25, // C4, E4, G4, C5
+            349.23, 440.00, 523.25, 698.46, // F4, A4, C5, F5
+            392.00, 493.88, 587.33, 783.99  // G4, B4, D5, G5
+        ];
+        let noteIdx = 0;
+
+        function playMelodyLoop() {
+            if (!isAudioPlaying) return;
+
+            playTone(melody[noteIdx], 'sine', 0.6, 0.05);
+            noteIdx = (noteIdx + 1) % melody.length;
+
+            audioTimer = setTimeout(playMelodyLoop, 500);
+        }
+
+        function toggleAudio() {
+            initAudio();
+            const soundIcon = document.getElementById('soundIcon');
+            const soundText = document.getElementById('soundText');
+
+            if (!isAudioPlaying) {
+                isAudioPlaying = true;
+                soundIcon.className = "fas fa-volume-up text-green-700 animate-pulse";
+                soundText.innerText = "Müzik Açık";
+                playMelodyLoop();
+            } else {
+                isAudioPlaying = false;
+                clearTimeout(audioTimer);
+                soundIcon.className = "fas fa-music";
+                soundText.innerText = "Fon Müzik";
+            }
+        }
+    </script>
+</body>
+</html>
